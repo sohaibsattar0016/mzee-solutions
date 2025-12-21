@@ -170,6 +170,7 @@ export default function Home() {
                     alt="AI Brain Visualization"
                     width={500}
                     height={500}
+                    unoptimized
                     className="drop-shadow-[0_0_60px_rgba(139,92,246,0.7)]"
                     priority
                   />
@@ -194,6 +195,7 @@ export default function Home() {
                     alt="AI Brain Visualization"
                     width={250}
                     height={250}
+                    unoptimized
                     className="drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]"
                   />
                 </motion.div>
