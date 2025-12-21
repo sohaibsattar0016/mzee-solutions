@@ -166,7 +166,7 @@ export default function Home() {
                   className="relative z-10"
                 >
                   <Image
-                    src="/hero-brain.png"
+                    src="/hero-brain-removebg-preview.png"
                     alt="AI Brain Visualization"
                     width={500}
                     height={500}
@@ -190,7 +190,7 @@ export default function Home() {
                   className="relative z-10"
                 >
                   <Image
-                    src="/hero-brain.png"
+                    src="/hero-brain-removebg-preview.png"
                     alt="AI Brain Visualization"
                     width={250}
                     height={250}
