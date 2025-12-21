@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState, useRef, useEffect } from "react";
-import { Send, Bot, User, Loader2, MessageCircle } from "lucide-react";
+import { Send, Bot, User, Loader2 } from "lucide-react";
 
 interface Message {
   id: string;
