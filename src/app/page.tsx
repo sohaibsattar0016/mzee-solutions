@@ -1,101 +1,422 @@
+"use client";
+
+import { motion } from "framer-motion";
+import Link from "next/link";
 import Image from "next/image";
+import { ArrowRight, Zap, Shield, TrendingUp } from "lucide-react";
+import { ParticleNetwork } from "@/components/ui/ParticleNetwork";
+import { TechMarquee } from "@/components/ui/TechMarquee";
+import { BorderBeamCard } from "@/components/ui/BorderBeamCard";
+import { ShimmerButton } from "@/components/ui/ShimmerButton";
+
+const valueProps = [
+  {
+    icon: Zap,
+    title: "Speed",
+    description:
+      "Lightning-fast delivery without compromising quality. We ship production-ready solutions in weeks, not months.",
+    gradient: "from-yellow-500 to-orange-500",
+  },
+  {
+    icon: Shield,
+    title: "Security",
+    description:
+      "Enterprise-grade security baked into every line of code. SOC2 compliant practices and battle-tested architectures.",
+    gradient: "from-green-500 to-emerald-500",
+  },
+  {
+    icon: TrendingUp,
+    title: "Scale",
+    description:
+      "Built for growth from day one. Our solutions handle millions of users without breaking a sweat.",
+    gradient: "from-blue-500 to-purple-500",
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  },
+};
+
+function AnimatedWireframe() {
+  return (
+    <div className="relative w-full max-w-lg aspect-square">
+      <svg
+        viewBox="0 0 400 400"
+        className="w-full h-full"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="wireGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#a855f7" stopOpacity="0.8" />
+            <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#3b82f6" stopOpacity="0.4" />
+          </linearGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <motion.g filter="url(#glow)">
+          {[0, 1, 2, 3, 4].map((ring, i) => (
+            <motion.circle
+              key={i}
+              cx="200"
+              cy="200"
+              r={60 + i * 35}
+              fill="none"
+              stroke="url(#wireGradient)"
+              strokeWidth="1"
+              strokeDasharray="10 5"
+              initial={{ rotate: 0, opacity: 0.3 }}
+              animate={{
+                rotate: i % 2 === 0 ? 360 : -360,
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                rotate: {
+                  duration: 20 + i * 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                },
+                opacity: {
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                },
+              }}
+            />
+          ))}
+
+          {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+            <motion.line
+              key={i}
+              x1="200"
+              y1="200"
+              x2={200 + 180 * Math.cos((angle * Math.PI) / 180)}
+              y2={200 + 180 * Math.sin((angle * Math.PI) / 180)}
+              stroke="url(#wireGradient)"
+              strokeWidth="1"
+              initial={{ opacity: 0.2 }}
+              animate={{ opacity: [0.2, 0.5, 0.2] }}
+              transition={{
+                duration: 2,
+                delay: i * 0.3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+
+          {[0, 45, 90, 135, 180, 225, 270, 315].map((angle, i) => (
+            <motion.circle
+              key={i}
+              cx={200 + 120 * Math.cos((angle * Math.PI) / 180)}
+              cy={200 + 120 * Math.sin((angle * Math.PI) / 180)}
+              r="4"
+              fill="#a855f7"
+              initial={{ scale: 0.5, opacity: 0.5 }}
+              animate={{ scale: [0.5, 1, 0.5], opacity: [0.5, 1, 0.5] }}
+              transition={{
+                duration: 2,
+                delay: i * 0.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+
+          <motion.circle
+            cx="200"
+            cy="200"
+            r="20"
+            fill="none"
+            stroke="#a855f7"
+            strokeWidth="2"
+            initial={{ scale: 1 }}
+            animate={{ scale: [1, 1.2, 1] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.circle
+            cx="200"
+            cy="200"
+            r="8"
+            fill="#a855f7"
+            initial={{ opacity: 0.8 }}
+            animate={{ opacity: [0.8, 1, 0.8] }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </motion.g>
+      </svg>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="relative">
+      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-[#020617] to-[#020617]">
+        <ParticleNetwork />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Circuit Lines - Left */}
+        <svg className="absolute left-0 top-0 w-64 h-full text-white/10 hidden md:block" viewBox="0 0 200 600" fill="none" preserveAspectRatio="xMinYMid slice">
+          <path d="M0 50 H60 V120 H90 V200 H40 V280 H80 V360 H30 V440 H70 V520 H50 V600" stroke="currentColor" strokeWidth="1" />
+          <path d="M0 100 H40 V180 H70 V260 H25 V340 H55 V420 H35 V500" stroke="currentColor" strokeWidth="1" />
+          <path d="M0 200 H30 V300 H50 V400 H20 V500" stroke="currentColor" strokeWidth="1" />
+          <circle cx="60" cy="50" r="4" fill="#a855f7" className="animate-pulse" />
+          <circle cx="90" cy="120" r="4" fill="#06b6d4" className="animate-pulse" />
+          <circle cx="40" cy="200" r="4" fill="#a855f7" className="animate-pulse" />
+          <circle cx="80" cy="280" r="4" fill="#06b6d4" className="animate-pulse" />
+          <circle cx="30" cy="360" r="4" fill="#a855f7" className="animate-pulse" />
+          <circle cx="70" cy="440" r="4" fill="#06b6d4" className="animate-pulse" />
+          <circle cx="50" cy="520" r="4" fill="#a855f7" className="animate-pulse" />
+        </svg>
+
+        {/* Circuit Lines - Right */}
+        <svg className="absolute right-0 top-0 w-64 h-full text-white/10 hidden md:block" viewBox="0 0 200 600" fill="none" preserveAspectRatio="xMaxYMid slice">
+          <path d="M200 80 H140 V160 H110 V240 H160 V320 H120 V400 H170 V480 H130 V560" stroke="currentColor" strokeWidth="1" />
+          <path d="M200 150 H160 V230 H130 V310 H175 V390 H145 V470 H165 V550" stroke="currentColor" strokeWidth="1" />
+          <path d="M200 250 H170 V350 H150 V450 H180 V550" stroke="currentColor" strokeWidth="1" />
+          <circle cx="140" cy="80" r="4" fill="#06b6d4" className="animate-pulse" />
+          <circle cx="110" cy="160" r="4" fill="#a855f7" className="animate-pulse" />
+          <circle cx="160" cy="240" r="4" fill="#06b6d4" className="animate-pulse" />
+          <circle cx="120" cy="320" r="4" fill="#a855f7" className="animate-pulse" />
+          <circle cx="170" cy="400" r="4" fill="#06b6d4" className="animate-pulse" />
+          <circle cx="130" cy="480" r="4" fill="#a855f7" className="animate-pulse" />
+        </svg>
+
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark-bg/50 to-dark-bg pointer-events-none" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid lg:grid-cols-2 gap-12 items-center"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="text-center lg:text-left">
+              <motion.div
+                variants={itemVariants}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6"
+              >
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-sm text-white/70">
+                  Now accepting new projects
+                </span>
+              </motion.div>
+
+              <motion.h1
+                variants={itemVariants}
+                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
+              >
+                Engineering{" "}
+                <span className="gradient-text">Intelligence</span>
+                <span className="text-neon-purple">.</span>
+              </motion.h1>
+
+              <motion.p
+                variants={itemVariants}
+                className="text-lg md:text-xl text-white/60 max-w-xl mb-8 mx-auto lg:mx-0"
+              >
+                We craft premium digital experiences that transform businesses.
+                From AI-powered solutions to stunning web applications, we
+                deliver excellence at scale.
+              </motion.p>
+
+              <motion.div
+                variants={itemVariants}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              >
+                <Link href="/contact">
+                  <ShimmerButton className="w-full sm:w-auto">
+                    <span className="flex items-center gap-2">
+                      Start Your Project
+                      <ArrowRight size={18} />
+                    </span>
+                  </ShimmerButton>
+                </Link>
+                <Link href="/blueprint">
+                  <motion.button
+                    className="w-full sm:w-auto px-8 py-4 rounded-xl border border-white/20 text-white font-semibold hover:bg-white/5 transition-colors"
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    View Our Process
+                  </motion.button>
+                </Link>
+              </motion.div>
+            </div>
+
+            <motion.div
+              variants={itemVariants}
+              className="hidden lg:flex justify-center items-center"
+            >
+              <div className="relative">
+                {/* Backlight Glow - Behind the Brain */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] rounded-full bg-purple-600 blur-[90px] opacity-50 pointer-events-none" />
+                
+                {/* Floating Brain with Anti-Gravity Animation */}
+                <motion.div
+                  animate={{ y: [0, -20, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10"
+                >
+                  <Image
+                    src="/hero-brain.png"
+                    alt="AI Brain Visualization"
+                    width={500}
+                    height={500}
+                    className="drop-shadow-[0_0_60px_rgba(139,92,246,0.7)]"
+                    priority
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+
+            {/* Mobile Brain - Smaller version for mobile screens */}
+            <motion.div
+              variants={itemVariants}
+              className="flex lg:hidden justify-center items-center mt-8"
+            >
+              <div className="relative">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60%] h-[60%] rounded-full bg-purple-600 blur-[60px] opacity-30 pointer-events-none" />
+                <motion.div
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                  className="relative z-10"
+                >
+                  <Image
+                    src="/hero-brain.png"
+                    alt="AI Brain Visualization"
+                    width={250}
+                    height={250}
+                    className="drop-shadow-[0_0_30px_rgba(139,92,246,0.5)]"
+                  />
+                </motion.div>
+              </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-dark-bg to-transparent" />
+      </section>
+
+      <section className="relative py-16 border-y border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center text-white/40 text-sm uppercase tracking-wider mb-8"
+          >
+            Powered by cutting-edge technology
+          </motion.p>
+          <TechMarquee />
+        </div>
+      </section>
+
+      <section className="relative py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Why Choose <span className="gradient-text">MZee</span>?
+            </h2>
+            <p className="text-white/60 max-w-2xl mx-auto">
+              We combine technical excellence with strategic thinking to deliver
+              solutions that drive real business results.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {valueProps.map((prop, index) => (
+              <motion.div
+                key={prop.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
+              >
+                <BorderBeamCard className="h-full">
+                  <div className="flex flex-col items-center text-center">
+                    <div
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${prop.gradient} flex items-center justify-center mb-6`}
+                    >
+                      <prop.icon size={28} className="text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-3">{prop.title}</h3>
+                    <p className="text-white/60">{prop.description}</p>
+                  </div>
+                </BorderBeamCard>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative py-24">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="glass-card p-12 md:p-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Ready to Build Something{" "}
+              <span className="gradient-text">Extraordinary</span>?
+            </h2>
+            <p className="text-white/60 mb-8 max-w-xl mx-auto">
+              Let&apos;s discuss your vision and create a digital experience
+              that sets you apart from the competition.
+            </p>
+            <Link href="/contact">
+              <ShimmerButton>
+                <span className="flex items-center gap-2">
+                  Get Started Today
+                  <ArrowRight size={18} />
+                </span>
+              </ShimmerButton>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 }
