@@ -42,9 +42,9 @@ export function Footer() {
               <Image
                 src="/images/logo-transparent.png"
                 alt="MZee Solutions Logo"
-                width={160}
-                height={55}
-                className="h-10 w-auto"
+                width={220}
+                height={76}
+                className="h-14 w-auto"
                 unoptimized
               />
             </Link>
