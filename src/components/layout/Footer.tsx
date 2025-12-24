@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 
 const footerLinks = {
@@ -38,12 +39,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-neon-purple to-neon-cyan flex items-center justify-center">
-                <span className="text-white font-bold text-lg">M</span>
-              </div>
-              <span className="text-xl font-bold text-white">
-                MZee<span className="text-neon-purple">.</span>
-              </span>
+              <Image
+                src="/images/logo-transparent.png"
+                alt="MZee Solutions Logo"
+                width={160}
+                height={55}
+                className="h-10 w-auto"
+                unoptimized
+              />
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-sm">
               Engineering intelligence for tomorrow&apos;s challenges. We build
