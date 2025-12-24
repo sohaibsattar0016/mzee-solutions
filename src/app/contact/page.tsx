@@ -278,7 +278,7 @@ export default function ContactPage() {
 
       {/* Floating WhatsApp Button */}
       <motion.a
-        href="https://wa.me/971544570178"
+        href="https://wa.me/971553879058?text=Hy%20MZee%20Solutions%20i%20want%20the%20Website%2FAi%20integration%20quote"
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-8 right-8 z-50 flex items-center gap-3 px-5 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-full shadow-lg shadow-green-500/30 transition-colors"
