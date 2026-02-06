@@ -33,8 +33,8 @@ const values = [
 
 const team = [
   {
-    name: "Muhammad Zeeshan",
-    role: "Founder & CEO",
+    name: "Mr Luke",
+    role: "CEO and Founder",
     bio: "Full-stack architect with 10+ years building scalable systems for Fortune 500 companies.",
     gradient: "from-purple-500 to-pink-500",
   },
